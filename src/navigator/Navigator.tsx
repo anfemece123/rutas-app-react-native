@@ -18,8 +18,8 @@ export const  Navigator=()=> {
         backgroundColor:'white'
       }
     }}>
-      <Stack.Screen name="MapScreen" component={MapScreen} />
       <Stack.Screen name="PermissionsScreen" component={PermissionsScreen} />
+      <Stack.Screen name="MapScreen" component={MapScreen} />
       <Stack.Screen name="LoadingScreen" component={LoadingScreen} />
 
     </Stack.Navigator>
