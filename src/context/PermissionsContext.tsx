@@ -5,7 +5,8 @@ import {
   PermissionStatus,
   check,
   request,
-} from "react-native-permissions";
+  openSettings,
+} from "react-native-permissions"; //OPENSETTINGS: abre los ajustes de la aplicacion
 
 export interface PermissionsState {
   locationStatus: PermissionStatus;
@@ -47,6 +48,11 @@ export const PermissionsProvider = ({ children }: any) => {
         PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION
       ); //el request pregunta no solo REVISA COMO EL CHACK
     }
+
+    if (permissionStatus === "blocked") {
+      openSettings();
+    }
+
     setPermissions({
       ...permissions,
       locationStatus: permissionStatus,
@@ -58,7 +64,7 @@ export const PermissionsProvider = ({ children }: any) => {
 
     if (Platform.OS === "ios") {
       permissionStatus = await check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE); //el check revisa el estado NO PREGUNTA
-      //    permissionStatus = await  request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+      // permissionStatus = await  request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
     } else {
       permissionStatus = await check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
       // permissionStatus = await  request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
